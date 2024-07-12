@@ -11,6 +11,7 @@ from data.post_processing import *
 from network.CRNN_custom import *
 from network.metrics_losses import *
 from focal_loss import *
+from params import *
 
 
 parser = argparse.ArgumentParser(description="Knowledge Distillation for Transfer Learning")
@@ -32,7 +33,6 @@ if __name__ == '__main__':
     model_ = 'strong_weakUK'  #'strong_weakUK'
 
     # set seeds for reproducible results
-    random.seed(123)
     np.random.seed(123)
     python_random.seed(123)
     tf.random.set_seed(1234)
@@ -65,28 +65,28 @@ if __name__ == '__main__':
 
 
     if model_ == 'strong_weakREFIT':
-        X_train_u = np.load('/raid/users/eprincipi/KD_agg_REFIT_pretrain/new_X_train.npy')
-        Y_train_u = np.load('/raid/users/eprincipi/KD_labels_REFIT_pretrain/new_Y_train.npy')
-        Y_train_weak_u = np.load('/raid/users/eprincipi/KD_labels_REFIT_pretrain/new_Y_train_weak.npy')
-        X_val_u = np.load('/raid/users/eprincipi/KD_agg_REFIT_pretrain/new_X_val.npy')
-        Y_val_u = np.load('/raid/users/eprincipi/KD_labels_REFIT_pretrain/new_Y_val.npy')
-        Y_val_weak_u = np.load('/raid/users/eprincipi/KD_labels_REFIT_pretrain/new_Y_val_weak.npy')
+        X_train_u = np.load('')
+        Y_train_u = np.load('')
+        Y_train_weak_u = np.load('')
+        X_val_u = np.load('')
+        Y_val_u = np.load('')
+        Y_val_weak_u = np.load('')
     if model_ == 'strong_weakUK':
 
-        X_train_u = np.load('/raid/users/eprincipi/KD_agg_UKDALE/new_X_train.npy')
-        Y_train_u = np.load('/raid/users/eprincipi/KD_labels_UKDALE/new_Y_train.npy')
-        Y_train_weak_u = np.load('/raid/users/eprincipi/KD_labels_UKDALE/new_Y_train_weak.npy')
-        X_val_u = np.load('/raid/users/eprincipi/KD_agg_UKDALE/new_X_val.npy')
-        Y_val_u = np.load('/raid/users/eprincipi/KD_labels_UKDALE/new_Y_val.npy')
-        Y_val_weak_u = np.load('/raid/users/eprincipi/KD_labels_UKDALE/new_Y_val_weak.npy')
+        X_train_u = np.load('')
+        Y_train_u = np.load('')
+        Y_train_weak_u = np.load('')
+        X_val_u = np.load('')
+        Y_val_u = np.load('')
+        Y_val_weak_u = np.load('')
 
-    X_train_r = np.load('/raid/users/eprincipi/KD_agg_REFIT/new2_X_train.npy')
-    Y_train_r = np.negative(np.ones((10481,2550,6))) #np.load('/raid/users/eprincipi/KD_labels_REFIT/new_Y_train.npy')
-    Y_train_weak_r = np.load('/raid/users/eprincipi/KD_labels_REFIT/new2_Y_train_weak.npy')
+    X_train_r = np.load('')
+    Y_train_r = np.negative(np.ones((len(X_train_r),window_size,classes))) #np.load('/raid/users/eprincipi/KD_labels_REFIT/new_Y_train.npy')
+    Y_train_weak_r = np.load('')
 
-    X_test_r = np.load('/raid/users/eprincipi/KD_agg_REFIT/new2_X_test.npy')
-    Y_test_r = np.load('/raid/users/eprincipi/KD_labels_REFIT/new2_Y_test.npy')
-    Y_test_weak_r = np.load('/raid/users/eprincipi/KD_labels_REFIT/new2_Y_test_weak.npy')
+    X_test_r = np.load('')
+    Y_test_r = np.load('')
+    Y_test_weak_r = np.load('')
 
     # TODO CONCATENA I DUE VALIDATION
     val_l = round(len(X_test_r) / 100 * 10 /2 )
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     y_strong_train = Y_train_r
     y_weak_train = Y_train_weak_r
 
-    weak_count(y_weak_train, classes=classes)
+
 
     # Standardization with uk-dale values
     if model_ == 'solo_weakUK' or model_ == 'strong_weakUK' or model_=='mixed':
